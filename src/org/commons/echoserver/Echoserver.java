@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.LinkedList;
 
 public class Echoserver
 {
@@ -14,21 +13,14 @@ public class Echoserver
 
     public Queue queue = new Queue();
 
-    public static void main(String[] args)
-    {
-        Commons.call(Echoserver.class, "{org.commons.echoserver.Bank003}","{grp.000}","{n/a}", "{ref.001}", "{exc.001}");
-
-        Commons.call(Echoclient.class, "{org.commons.echoserver.Bank003}","{grp.000}","{n/a}", "{ref.002}", "{exc.001}");
-    }
-
     public Echoserver()
     {
-        Constructors.call(Echoserver.class, "{org.commons.echoserver.Bank003}","{grp.001}","{n/a}", "{ref.001}", "{exc.001}", this);
+        Constructors.call(Echoserver.class, "{org.commons.echoserver}","{grp.001}","{n/a}", "{ref.001}", "{exc.001}", this);
     }
 
     public static class Thread001 extends Thread
     {
-        public Internals internals;
+        public Internals internals = new Internals();
 
         public Thread001(Echoserver echoserver)
         {
@@ -38,17 +30,19 @@ public class Echoserver
         @Override
         public void run()
         {
-            Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver.Bank003}","{grp.002}","{n/a}", "{ref.001}", "{exc.001}", this.internals);
+            Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver}","{grp.002}","{n/a}", "{ref.001}", "{exc.001}", this.internals);
 
             while(true)
             {
-                Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver.Bank003}","{grp.002}","{n/a}", "{ref.002}", "{exc.001}", this.internals);
+                Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver}","{grp.002}","{n/a}", "{ref.002}", "{exc.001}", this.internals);
 
-                Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver.Bank003}","{grp.002}","{n/a}", "{ref.003}", "{exc.001}", this.internals);
+                Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver}","{grp.002}","{n/a}", "{ref.003}", "{exc.001}", this.internals);
 
-                Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver.Bank003}","{grp.002}","{n/a}", "{ref.004}", "{exc.001}", this.internals);
+                Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver}","{grp.002}","{n/a}", "{ref.004}", "{exc.001}", this.internals);
 
-                Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver.Bank003}","{grp.002}","{n/a}", "{ref.005}", "{exc.001}", this.internals);
+                Commons.call(Echoserver.Thread001.class, "{org.commons.echoserver}","{grp.002}","{n/a}", "{ref.005}", "{exc.001}", this.internals);
+
+                Commons.call(Threading.Sleep.class, "{org.commons.threading}","{}","{}", "{}", "{exc.001}", 10L);
             }
         }
 
@@ -72,7 +66,7 @@ public class Echoserver
 
     public static class Thread002 extends Thread
     {
-        public Internals internals;
+        public Internals internals = new Internals();
 
         public Thread002(Echoserver echoserver)
         {
@@ -84,9 +78,11 @@ public class Echoserver
         {
             while(true)
             {
-                Commons.call(Echoserver.Thread002.class, "{org.commons.echoserver.Bank003}","{grp.003}","{n/a}", "{ref.001}", "{exc.001}", this.internals);
+                Commons.call(Echoserver.Thread002.class, "{org.commons.echoserver}","{grp.003}","{n/a}", "{ref.001}", "{exc.001}", this.internals);
 
-                Commons.call(Echoserver.Thread002.class, "{org.commons.echoserver.Bank003}","{grp.003}","{n/a}", "{ref.002}", "{exc.001}", this.internals);
+                Commons.call(Echoserver.Thread002.class, "{org.commons.echoserver}","{grp.003}","{n/a}", "{ref.002}", "{exc.001}", this.internals);
+
+                Commons.call(Threading.Sleep.class, "{org.commons.threading}","{}","{}", "{}", "{exc.001}", 10L);
             }
         }
 
@@ -98,4 +94,3 @@ public class Echoserver
         }
     }
 }
-

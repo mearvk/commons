@@ -8,8 +8,24 @@ public class Commons
 {
     public static void call(Class<?> klass, final String namespace, final String grouping, final String subgrouping, final String reference, final String handler, final Object...objects)
     {
-        if(namespace.equals("{org.commons.echoserver.Bank003}"))
+        if(namespace.equals("{org.commons.echoserver}"))
         {
+            if(klass.isAssignableFrom(Threading.Sleep.class))
+            {
+                Long millis = (Long)objects[0];
+
+                try
+                {
+                    if(millis==null) return;
+
+                    Thread.sleep(millis);
+                }
+                catch(Exception exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+
             if(klass.isAssignableFrom(Echoserver.Thread001.class))
             {
                 if(grouping.equals("{grp.002}"))
@@ -87,20 +103,15 @@ public class Commons
                     {
                         Echoserver.Thread001.Internals internals = (Echoserver.Thread001.Internals) objects[0];
 
-                        try
-                        {
-                            internals.echoserver.queue.enqueue(internals.message);
-                        }
-                        catch(Exception exception)
-                        {
-                            exception.printStackTrace();
-                        }
+                        System.err.println("Received: "+internals.message.value);
+
+                        internals.echoserver.queue.enqueue(internals.message);
                     }
                 }
             }
         }
 
-        if(namespace.equals("{org.commons.echoserver.Bank003}"))
+        if(namespace.equals("{org.commons.echoserver}"))
         {
             if (klass.isAssignableFrom(Echoserver.Thread002.class))
             {
@@ -121,6 +132,8 @@ public class Commons
 
                         try
                         {
+                            System.err.println("Returned: "+internals.message.value+"\n");
+
                             internals.message.os.write(internals.message.value.getBytes());
 
                             internals.message.os.flush();
@@ -138,24 +151,12 @@ public class Commons
 
         if(klass.isAssignableFrom(Echoserver.class))
         {
-            if(grouping.equals("{grp.001}"))
-            {
-                if(reference.equals("{ref.001}"))
-                {
-                    Echoserver echoserver = new Echoserver();
-                }
-            }
+            Echoserver echoserver = new Echoserver();
         }
 
         if(klass.isAssignableFrom(Echoclient.class))
         {
-            if(grouping.equals("{grp.001}"))
-            {
-                if(reference.equals("{ref.001}"))
-                {
-                    Echoclient echoclient = new Echoclient();
-                }
-            }
+            Echoclient echoclient = new Echoclient();
         }
     }
 }
