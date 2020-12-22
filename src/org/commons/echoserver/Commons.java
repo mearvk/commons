@@ -103,7 +103,7 @@ public class Commons
                     {
                         Echoserver.Thread001.Internals internals = (Echoserver.Thread001.Internals) objects[0];
 
-                        System.err.println("Received: "+internals.message.value);
+                        System.out.println("Received: "+internals.message.value);
 
                         internals.echoserver.queue.enqueue(internals.message);
                     }
@@ -132,7 +132,7 @@ public class Commons
 
                         try
                         {
-                            System.err.println("Returned: "+internals.message.value+"\n");
+                            System.out.println("Returned: "+internals.message.value+"\n");
 
                             internals.message.os.write(internals.message.value.getBytes());
 
