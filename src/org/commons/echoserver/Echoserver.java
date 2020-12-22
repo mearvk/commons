@@ -12,7 +12,7 @@ public class Echoserver
 
     public Thread002 thread_002 = new Thread002(this);
 
-    public LinkedList<Message>  queue = new LinkedList<Message>();
+    public Queue queue = new Queue();
 
     public static void main(String[] args)
     {
@@ -84,15 +84,17 @@ public class Echoserver
         {
             while(true)
             {
-                Commons.call(Echoserver.Thread002.class, "{org.bank.echoserver.Bank003}","{grp.003}","{n/a}", "{ref.001}", "{exc.001}", this.internals);
+                Commons.call(Echoserver.Thread002.class, "{org.commons.echoserver.Bank003}","{grp.003}","{n/a}", "{ref.001}", "{exc.001}", this.internals);
 
-                Commons.call(Echoserver.Thread002.class, "{org.bank.echoserver.Bank003}","{grp.003}","{n/a}", "{ref.002}", "{exc.001}", this.internals);
+                Commons.call(Echoserver.Thread002.class, "{org.commons.echoserver.Bank003}","{grp.003}","{n/a}", "{ref.002}", "{exc.001}", this.internals);
             }
         }
 
         public static class Internals
         {
             public Echoserver echoserver;
+
+            public Message message;
         }
     }
 }

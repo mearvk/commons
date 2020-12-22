@@ -8,7 +8,7 @@ public class Commons
 {
     public static void call(Class<?> klass, final String namespace, final String grouping, final String subgrouping, final String reference, final String handler, final Object...objects)
     {
-        if(namespace.equals("{org.bank.echoserver.Bank003}"))
+        if(namespace.equals("{org.commons.echoserver.Bank003}"))
         {
             if(klass.isAssignableFrom(Echoserver.Thread001.class))
             {
@@ -89,7 +89,7 @@ public class Commons
 
                         try
                         {
-                            internals.echoserver.queue.add(internals.message);
+                            internals.echoserver.queue.enqueue(internals.message);
                         }
                         catch(Exception exception)
                         {
@@ -100,13 +100,38 @@ public class Commons
             }
         }
 
-        if(namespace.equals("{org.bank.echoserver.Bank003}"))
+        if(namespace.equals("{org.commons.echoserver.Bank003}"))
         {
             if (klass.isAssignableFrom(Echoserver.Thread002.class))
             {
                 if (grouping.equals("{grp.003}"))
                 {
+                    if(reference.equals("{ref.001}"))
+                    {
+                        Echoserver.Thread002.Internals internals = (Echoserver.Thread002.Internals) objects[0];
 
+                        internals.message = internals.echoserver.queue.dequeue();
+                    }
+
+                    if(reference.equals("{ref.002}"))
+                    {
+                        Echoserver.Thread002.Internals internals = (Echoserver.Thread002.Internals) objects[0];
+
+                        if(internals.message==null) return;
+
+                        try
+                        {
+                            internals.message.os.write(internals.message.value.getBytes());
+
+                            internals.message.os.flush();
+
+                            internals.message.os.close();
+                        }
+                        catch (Exception exception)
+                        {
+                            exception.printStackTrace();
+                        }
+                    }
                 }
             }
         }
